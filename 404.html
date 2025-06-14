@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta http-equiv="refresh" content="0; url=/smart-test-app/" />
+    <script>
+      // For client-side routing on GitHub Pages
+      var l = window.location;
+      var path = l.pathname.replace(/^\/smart-test-app/, '');
+      var newUrl = l.origin + '/smart-test-app/?redirect=' + encodeURIComponent(path + l.search + l.hash);
+      window.location.replace(newUrl);
+    </script>
+  </head>
+  <body></body>
+</html>

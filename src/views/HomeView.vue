@@ -1,7 +1,6 @@
 <script setup>
 import { ref, onMounted } from 'vue'
 import FHIR from 'fhirclient'
-import TheWelcome from '../components/TheWelcome.vue'
 
 const output = ref('Loading FHIR data...')
 
@@ -21,7 +20,6 @@ onMounted(() => {
 
 <template>
   <main>
-    <TheWelcome />
     <section style="margin-top:2rem">
       <h2>FHIR Server Data</h2>
       <pre>{{ output }}</pre>

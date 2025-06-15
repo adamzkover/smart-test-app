@@ -1,0 +1,1 @@
+import{c as n,a as e,F as r,o}from"./index-sxSGY50Y.js";const u={__name:"LaunchView",setup(s){function a(){r.oauth2.authorize({clientId:"smart-test-app",scope:"launch openid fhirUser patient/*.read",redirectUri:"/smart-test-app/#/"})}return(c,t)=>(o(),n("main",null,[t[0]||(t[0]=e("h1",null,"SMART on FHIR Launch",-1)),e("button",{onClick:a},"Launch App")]))}};export{u as default};

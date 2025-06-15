@@ -1,4 +1,29 @@
+<template>
+  <main>
+    <section>
+      <h2>Patient ID</h2>
+      <pre>{{ patientId }}</pre>
+    </section>
+    <section>
+      <h2>Patient Resource</h2>
+      <button @click="loadPatient">Load Patient Resource</button>
+      <pre>{{ patientData }}</pre>
+    </section>
+    <section>
+      <h2>User Resource</h2>
+      <button @click="loadUser">Load User Resource</button>
+      <pre>{{ userData }}</pre>
+    </section>
+    <section>
+      <h2>Patient Medications (MedicationStatement)</h2>
+      <button @click="loadMedications">Load Medications</button>
+      <pre>{{ medications }}</pre>
+    </section>
+  </main>
+</template>
+
 <script setup>
+
 import { ref, onMounted } from 'vue'
 import FHIR from 'fhirclient'
 
@@ -57,28 +82,5 @@ function loadMedications() {
     medications.value = 'No patient context for medications'
   }
 }
-</script>
 
-<template>
-  <main>
-    <section>
-      <h2>Patient ID</h2>
-      <pre>{{ patientId }}</pre>
-    </section>
-    <section>
-      <h2>Patient Resource</h2>
-      <button @click="loadPatient">Load Patient Resource</button>
-      <pre>{{ patientData }}</pre>
-    </section>
-    <section>
-      <h2>User Resource</h2>
-      <button @click="loadUser">Load User Resource</button>
-      <pre>{{ userData }}</pre>
-    </section>
-    <section>
-      <h2>Patient Medications (MedicationStatement)</h2>
-      <button @click="loadMedications">Load Medications</button>
-      <pre>{{ medications }}</pre>
-    </section>
-  </main>
-</template>
+</script>

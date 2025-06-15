@@ -31,10 +31,16 @@ Deploy to GitHub Pages:
 npm run deploy
 ```
 
-## Recommended IDE Setup
+## Recommended IDE setup
 
 [VSCode](https://code.visualstudio.com/) + [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar) (and disable Vetur).
 
 ## Customize configuration
 
 See [Vite Configuration Reference](https://vite.dev/config/).
+
+## SMART on FHIR documentation
+
+* [docs.smarthealthit.org](https://docs.smarthealthit.org/)
+* [SMART App Launch IG](https://www.hl7.org/fhir/smart-app-launch/index.html)
+* [JavaScript/TypeScript Library](https://docs.smarthealthit.org/client-js/)

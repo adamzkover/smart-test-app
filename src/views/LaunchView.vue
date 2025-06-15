@@ -1,39 +1,30 @@
 <template>
-  <div class="launch-container">
+  <main>
     <h1>SMART on FHIR Launch</h1>
     <button @click="startAuth">Launch App</button>
-  </div>
+  </main>
 </template>
 
 <script setup>
-import { useRouter } from 'vue-router'
-import FHIR from 'fhirclient'
 
-const router = useRouter()
+import FHIR from 'fhirclient'
 
 function startAuth() {
 
-  // The client_id that you should have obtained after registering a client at the EHR.
-  const clientId = 'my-client-id'
+  // EHR launch. The EHR sandbox calls this URL with the following query parameters:
+  // * iss: "Identifies the EHR's FHIR endpoint"
+  // * launch: "Opaque identifier for this specific launch and any EHR context associated with it"
 
-  // The scopes that you request from the EHR. In this case we want to:
-  // launch            - Get the launch context
-  // openid & fhirUser - Get the current user
-  // patient/*.read    - Read patient data
-  // TODO link to the scopes documentation
-  const scope = 'launch openid fhirUser patient/*.read'
-
-  // TODO redirectUri documentation
-  const redirectUri = window.location.origin + '/smart-test-app/'
-
-  const iss = new URLSearchParams(window.location.search).get('iss') || 'https://fhirserver.example.com'
+  // Options: https://docs.smarthealthit.org/client-js/api.html#common-options
   FHIR.oauth2.authorize({
-    clientId,
-    scope,
-    redirectUri,
-    iss,
-    state: '123',
-    aud: iss
+    // The client_id that you should have obtained after registering a client at the EHR.
+    clientId: "smart-test-app",
+    // The scopes that you request from the EHR.
+    // https://www.hl7.org/fhir/smart-app-launch/scopes-and-launch-context.html
+    scope: 'launch openid fhirUser patient/*.read',
+    // Where to redirect to after successful authorization.
+    redirectUri: '/smart-test-app/#/'
   })
 }
+
 </script>

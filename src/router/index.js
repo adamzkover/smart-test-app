@@ -10,6 +10,11 @@ const router = createRouter({
       component: () => import('../views/LaunchView.vue'),
     },
     {
+      path: '/launch-standalone',
+      name: 'launch-standalone',
+      component: () => import('../views/StandaloneLaunchView.vue'),
+    },
+    {
       path: '/',
       name: 'home',
       component: HomeView,

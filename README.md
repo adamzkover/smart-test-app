@@ -1,9 +1,35 @@
-# smart-test-app
+# Test app for SMART on FHIR
 
 > **Deployed App:** [https://adamzkover.github.io/smart-test-app/](https://adamzkover.github.io/smart-test-app/)
 >
 
-This template should help get you started developing with Vue 3 in Vite.
+## Running the app
+
+* Open the [SMART Launcher](https://launch.smarthealthit.org/) sandbox.
+* Enter `https://adamzkover.github.io/smart-test-app/#/launch` for App's Launch URL and click Launch.
+* This will open the app's launch view. Click the Launch App button.
+* Choose the Practitioner and the patient.
+* This will open the app's main view and display the FHIR data fetched from the server.
+
+## Scripts
+
+Install dependencies:
+
+```sh
+npm install
+```
+
+Run the app locally for development:
+
+```sh
+npm run dev
+```
+
+Deploy to GitHub Pages:
+
+```sh
+npm run deploy
+```
 
 ## Recommended IDE Setup
 
@@ -12,21 +38,3 @@ This template should help get you started developing with Vue 3 in Vite.
 ## Customize configuration
 
 See [Vite Configuration Reference](https://vite.dev/config/).
-
-## Project Setup
-
-```sh
-npm install
-```
-
-### Compile and Hot-Reload for Development
-
-```sh
-npm run dev
-```
-
-### Compile and Minify for Production
-
-```sh
-npm run build
-```

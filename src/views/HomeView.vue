@@ -20,7 +20,7 @@ onMounted(() => {
 
 <template>
   <main>
-    <section style="margin-top:2rem">
+    <section>
       <h2>FHIR Server Data</h2>
       <pre>{{ output }}</pre>
     </section>

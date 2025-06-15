@@ -12,12 +12,24 @@ import FHIR from 'fhirclient'
 const router = useRouter()
 
 function startAuth() {
+
+  // The client_id that you should have obtained after registering a client at the EHR.
   const clientId = 'my-client-id'
+
+  // The scopes that you request from the EHR. In this case we want to:
+  // launch            - Get the launch context
+  // openid & fhirUser - Get the current user
+  // patient/*.read    - Read patient data
+  // TODO link to the scopes documentation
+  const scope = 'launch openid fhirUser patient/*.read'
+
+  // TODO redirectUri documentation
   const redirectUri = window.location.origin + '/smart-test-app/'
+
   const iss = new URLSearchParams(window.location.search).get('iss') || 'https://fhirserver.example.com'
   FHIR.oauth2.authorize({
     clientId,
-    scope: 'launch openid fhirUser patient/*.read',
+    scope,
     redirectUri,
     iss,
     state: '123',
@@ -25,17 +37,3 @@ function startAuth() {
   })
 }
 </script>
-
-<style scoped>
-.launch-container {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  margin-top: 3rem;
-}
-button {
-  margin-top: 1rem;
-  padding: 0.5rem 1.5rem;
-  font-size: 1.2rem;
-}
-</style>

@@ -3,12 +3,17 @@ import { RouterLink, RouterView } from 'vue-router'
 </script>
 
 <template>
-  <header>
-    <div class="wrapper">
-      <nav>
+  <BNavbar
+      v-b-color-mode="'dark'"
+      toggleable="lg"
+      variant="primary"
+  >
+    <BNavbarBrand href="#">NavBar</BNavbarBrand>
+    <BNav>
+      <BNavItem>
         <RouterLink to="/">Home</RouterLink>
-      </nav>
-    </div>
-  </header>
+      </BNavItem>
+    </BNav>
+  </BNavbar>
   <RouterView />
 </template>

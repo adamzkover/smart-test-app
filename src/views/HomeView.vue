@@ -3,52 +3,60 @@ import { ref, onMounted } from 'vue'
 import FHIR from 'fhirclient'
 
 const patientId = ref('Loading...')
-const patientData = ref('Loading...')
-const userData = ref('Loading...')
-const medications = ref('Loading...')
+const patientData = ref('')
+const userData = ref('')
+const medications = ref('')
+let client = null
 
 onMounted(() => {
-  FHIR.oauth2.ready().then(client => {
-    // 1. Show client.patient.id
+  FHIR.oauth2.ready().then(c => {
+    client = c
     patientId.value = client.patient.id || 'No patient context'
+  }).catch(err => {
+    patientId.value = 'SMART client error: ' + err
+  })
+})
 
-    // 2. Show client.patient.read() JSON string
+function loadPatient() {
+  if (client && client.patient && client.patient.read) {
+    patientData.value = 'Loading...'
     client.patient.read().then(res => {
       patientData.value = JSON.stringify(res, null, 2)
     }).catch(err => {
       patientData.value = 'Error: ' + err
     })
+  } else {
+    patientData.value = 'No patient context'
+  }
+}
 
-    // 3. Show client.user.read() JSON string
-    if (client.user && client.user.read) {
-      client.user.read().then(res => {
-        userData.value = JSON.stringify(res, null, 2)
-      }).catch(err => {
-        userData.value = 'Error: ' + err
+function loadUser() {
+  if (client && client.user && client.user.read) {
+    userData.value = 'Loading...'
+    client.user.read().then(res => {
+      userData.value = JSON.stringify(res, null, 2)
+    }).catch(err => {
+      userData.value = 'Error: ' + err
+    })
+  } else {
+    userData.value = 'No user context'
+  }
+}
+
+function loadMedications() {
+  if (client && client.patient && client.patient.id) {
+    medications.value = 'Loading...'
+    client.request(`MedicationStatement?subject=Patient/${client.patient.id}`)
+      .then(res => {
+        medications.value = JSON.stringify(res, null, 2)
       })
-    } else {
-      userData.value = 'No user context'
-    }
-
-    // 4. Fetch MedicationStatement for the patient
-    if (client.patient && client.patient.id) {
-      client.request(`MedicationStatement?subject=Patient/${client.patient.id}`)
-        .then(res => {
-          medications.value = JSON.stringify(res, null, 2)
-        })
-        .catch(err => {
-          medications.value = 'Error: ' + err
-        })
-    } else {
-      medications.value = 'No patient context for medications'
-    }
-  }).catch(err => {
-    patientId.value = 'SMART client error: ' + err
-    patientData.value = 'SMART client error: ' + err
-    userData.value = 'SMART client error: ' + err
-    medications.value = 'SMART client error: ' + err
-  })
-})
+      .catch(err => {
+        medications.value = 'Error: ' + err
+      })
+  } else {
+    medications.value = 'No patient context for medications'
+  }
+}
 </script>
 
 <template>
@@ -59,14 +67,17 @@ onMounted(() => {
     </section>
     <section>
       <h2>Patient Resource</h2>
+      <button @click="loadPatient">Load Patient Resource</button>
       <pre>{{ patientData }}</pre>
     </section>
     <section>
       <h2>User Resource</h2>
+      <button @click="loadUser">Load User Resource</button>
       <pre>{{ userData }}</pre>
     </section>
     <section>
       <h2>Patient Medications (MedicationStatement)</h2>
+      <button @click="loadMedications">Load Medications</button>
       <pre>{{ medications }}</pre>
     </section>
   </main>

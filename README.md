@@ -5,10 +5,25 @@
 
 ## Running the app
 
+### EHR Launch
+
 * Open the [SMART Launcher](https://launch.smarthealthit.org/) sandbox.
+* Select "Provider EHR Launch" or "Patient Portal Launch" for Launch Type
 * Enter `https://adamzkover.github.io/smart-test-app/#/launch` for App's Launch URL and click Launch.
-* This will open the app's launch view. Click the Launch App button.
-* Choose the Practitioner and the patient.
+* This will open the app's launch view and start authentication. * Choose the Practitioner and the Patient.
+* This will open the app's main view and display the FHIR data fetched from the server.
+
+### Standalone Launch
+
+* Open the [SMART Launcher](https://launch.smarthealthit.org/) sandbox.
+* Select "Provider Standalone Launch" or "Patient Standalone Launch" for Launch Type
+* Select the Provider and Practitioner
+* Copy the link from Server's FHIR Base URL
+* Open https://adamzkover.github.io/smart-test-app/#/launch-standalone
+* Paste the link from the SMART Launcher into the text field
+* Click Launch App
+* In Patient Standalone Launch, confirm log in as the patient
+* Approve the permission request
 * This will open the app's main view and display the FHIR data fetched from the server.
 
 ## Scripts
